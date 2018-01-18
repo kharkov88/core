@@ -13,15 +13,15 @@ app.get('/', function(req, res) {
 
 app.listen(8080);
 
-var html = `
-    <!DOCTYPE html>
-      <html>
+var html = `<!DOCTYPE html>
+      <html lang='en'>
       <head>
           <script id="detecter" type="text/javascript">
+          document.onload = function (){console.log('dom loaded!!!')}
           (function(win, doc, detect, options){
           	if (detect()) {
           		document.write('<meta name="viewport" content="width=device-width, initial-scale=1">');
-          		document.write('<p>hello mobile</p>');
+          		document.write('<meta >');
           		document.write('<plaintext style="display:none">');
 	          	load = function() {
 	  				attachedScript = document.createElement('script'),
@@ -35,7 +35,8 @@ var html = `
 					attachedScript.onload = attachedScript.onreadystatechange = function() {
 						if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
 							try {
-								Core.init(window, document, storage, options);
+								Core.init(window, document, options);
+								Core.implement();
 							} catch (e) {
 								console.error('Unable to initialize Flamingo Engine', e);
 							};
